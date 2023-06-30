@@ -49,6 +49,58 @@
   border-radius: var(--border-radius);
 }
 
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  width: 40%;
+  max-width: 500px;
+  height: 80%;
+  max-height: 400px;
+  margin: auto;
+
+  background-color: var(--white);
+  box-shadow: var(--box-shadow-2);
+  border-radius: var(--border-radius);
+
+  h2 {
+    margin-bottom: 20px;
+  }
+
+  .inputContainer {
+    margin: 0 auto;
+    width: 80%;
+    max-width: 300px;
+
+    input {
+      width: 100%;
+      padding: 8px 16px;
+      border-radius: var(--border-radius);
+      border: solid 1px var(--legend);
+      font-size: 16px;
+    }
+  }
+
+  button {
+    background-color: var(--highlight-1);
+    color: var(--text-white);
+    margin: 0 auto;
+    margin-top: 16px;
+    width: 60%;
+    max-width: 190px;
+    padding: 8px 16px;
+    border-radius: var(--border-radius);
+    font-size: 16px;
+
+    &:hover {
+      opacity: 0.9;
+      cursor: pointer;
+    }
+  }
+}
+
 .googleBtn {
   all: unset;
   display: flex;
@@ -72,3 +124,4 @@
     scale: 1.3;
   }
 }
+
