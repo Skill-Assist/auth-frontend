@@ -40,6 +40,7 @@ const Login: FC = () => {
     console.log(response)
     if (response.status === 200) {
       router.push(`${process.env.NEXT_PUBLIC_USER_APP_URL}`)
+      console.log(process.env.NEXT_PUBLIC_USER_APP_URL)
     } else {
       alert(response.data.message)
     }
