@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, useState } from 'react'
+import { FC, useRef } from 'react'
 import { useLottie } from 'lottie-react'
 import Image from 'next/image'
 
@@ -14,10 +14,8 @@ import userService from '@/services/userService'
 
 const Login: FC = () => {
   const router = useRouter()
-  const [user, setUser] = useState({
-    email: '',
-    password: '',
-  })
+  const emailInputRef = useRef<HTMLInputElement>(null)
+  const passwordInputRef = useRef<HTMLInputElement>(null)
 
   const options = {
     animationData: workingMan,
@@ -28,11 +26,20 @@ const Login: FC = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
-    const response = await userService.signin(user.email, user.password)
+
+    const enteredEmail = emailInputRef.current?.value
+    const enteredPassword = passwordInputRef.current?.value
+
+    if (!enteredEmail || !enteredPassword) {
+      alert('Preencha todos os campos')
+      return
+    }
+
+    const response = await userService.signin(enteredEmail, enteredPassword)
 
     console.log(response)
     if (response.status === 200) {
-      router.push('https://www.google.com')
+      router.push('http://localhost:3001/')
     } else {
       alert(response.data.message)
     }
@@ -54,8 +61,7 @@ const Login: FC = () => {
           <div className={styles.inputContainer}>
             <input
               type="email"
-              value={user.email}
-              onChange={(e) => setUser({ ...user, email: e.target.value })}
+              ref={emailInputRef}
               placeholder="E-mail"
               pattern="[a-z0-9._%+]+@[a-z0-9.]+\.[a-z]{2,}$"
               required
@@ -65,8 +71,7 @@ const Login: FC = () => {
           <div className={styles.inputContainer}>
             <input
               type="password"
-              value={user.password}
-              onChange={(e) => setUser({ ...user, password: e.target.value })}
+              ref={passwordInputRef}
               placeholder="Password"
               required
             />
