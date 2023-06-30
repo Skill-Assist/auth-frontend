@@ -39,7 +39,7 @@ const Login: FC = () => {
 
     console.log(response)
     if (response.status === 200) {
-      router.push('http://localhost:3001/')
+      router.push(`${process.env.NEXT_PUBLIC_USER_APP_URL}`)
     } else {
       alert(response.data.message)
     }
