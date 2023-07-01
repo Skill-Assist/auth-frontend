@@ -1,0 +1,163 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.header {
+  padding: 2rem;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+
+  h1 {
+
+    color: var(--highlight-1);
+  }
+
+  p {
+    color: var(--legend)
+  }
+}
+
+.form {
+  width: 60%;
+  max-width: 600px;
+  margin: 2rem;
+  padding: 2rem;
+  border-radius: var(--border-radius-medium);
+  box-shadow: var(--box-shadow-2);
+}
+
+.roleContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  gap: 1rem;
+
+  h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--text);
+  }
+
+  div {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin: 1rem 0 2rem;
+    gap: 1.5rem;
+
+    button {
+      width: 40%;
+      padding: 2rem 1rem;
+      border-radius: 1.4rem;
+      border: .2rem solid rgba(105, 105, 105, 0.18);
+      background-color: var(--background);
+      color: var(--text);
+      font-size: 1.4rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        background-color: var(--highlight-3);
+        color: var(--highlight-1);
+      }
+    }
+  }
+
+}
+
+.active {
+  background-color: var(--highlight-3) !important;
+  color: var(--highlight-1) !important;
+  border: .2rem solid var(--highlight-2) !important;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.2rem;
+  position: relative;
+
+  label {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--text);
+    margin-bottom: 0.1rem;
+  }
+
+  span {
+    color: var(--warning);
+  }
+
+  input {
+    border-radius: 1.2rem;
+    padding: 0.8rem 1rem;
+    width: 100%;
+    border: .1rem solid rgba(105, 105, 105, 0.18);
+    font-size: 1.2rem;
+  }
+
+  svg {
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    margin-left: 1rem;
+    cursor: pointer;
+  }
+}
+
+.line {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+
+  button {
+    padding: 0.8rem 2.6rem;
+    border-radius: 1.2rem;
+    font-weight: 500;
+    font-size: 1.4rem;
+    border: .1rem solid rgba(105, 105, 105, 0.18);
+    transition: 200ms ease-in;
+    font-weight: bold;
+    background: var(--highlight-1);
+    color: var(--text-white);
+
+    &:hover {
+      scale: 1.05;
+    }
+  }
+
+  a {
+    color: var(--text);
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-decoration: underline;
+  }
+}
+
+.loading{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.error{
+  color: var(--warning);
+  font-size: 1.2rem;
+  font-weight: bold;
+}
