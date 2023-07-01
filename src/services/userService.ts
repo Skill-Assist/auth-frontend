@@ -12,7 +12,9 @@ const userService = {
         password,
       })
 
-      cookie.save('token', response.data.access_token, {})
+      cookie.save('token', response.data.access_token, {
+        domain: '.skillassist.com.br',
+      })
       return response
     } catch (error: any) {
       return error.response.data
@@ -32,7 +34,9 @@ const userService = {
         mobilePhone,
       })
 
-      cookie.save('token', response.data.access_token, {})
+      cookie.save('token', response.data.access_token, {
+        domain: '.skillassist.com.br',
+      })
       return response.data
     } catch (error: any) {
       return error.response.data
