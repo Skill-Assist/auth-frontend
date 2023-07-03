@@ -105,8 +105,8 @@ const SignUp = () => {
     const enteredEmail = emailInputRef.current?.value
     const enteredPassword = passwordInputRef.current?.value
     const enteredConfirmedPassword = confirmedPasswordInputRef.current?.value
-    const enteredNationalId = nationalIdInputRef.current?.value
-    const enteredMobilePhone = mobilePhoneInputRef.current?.value
+    // const enteredNationalId = nationalIdInputRef.current?.value
+    // const enteredMobilePhone = mobilePhoneInputRef.current?.value
 
     if (
       !enteredName ||
@@ -134,8 +134,8 @@ const SignUp = () => {
       name: enteredName,
       email: enteredEmail,
       password: enteredPassword,
-      nationalId: enteredNationalId,
-      mobilePhone: enteredMobilePhone,
+      // nationalId: enteredNationalId,
+      // mobilePhone: enteredMobilePhone,
       roles: [role],
     }
 
