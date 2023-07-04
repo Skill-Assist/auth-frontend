@@ -61,8 +61,8 @@ const SignUp = () => {
   const emailInputRef = useRef<HTMLInputElement>(null)
   const passwordInputRef = useRef<HTMLInputElement>(null)
   const confirmedPasswordInputRef = useRef<HTMLInputElement>(null)
-  const nationalIdInputRef = useRef<HTMLInputElement>(null)
-  const mobilePhoneInputRef = useRef<HTMLInputElement>(null)
+  const nationalIdInput = useState('')
+  const mobilePhoneInput = useState('')
 
   const togglePassword = () => {
     setShowPass(!showPass)
@@ -105,14 +105,16 @@ const SignUp = () => {
     const enteredEmail = emailInputRef.current?.value
     const enteredPassword = passwordInputRef.current?.value
     const enteredConfirmedPassword = confirmedPasswordInputRef.current?.value
-    // const enteredNationalId = nationalIdInputRef.current?.value
-    // const enteredMobilePhone = mobilePhoneInputRef.current?.value
+    const enteredMobilePhone = mobilePhoneInput[0]
+    const enteredNationalId = nationalIdInput[0]
 
     if (
       !enteredName ||
       !enteredEmail ||
       !enteredPassword ||
-      !enteredConfirmedPassword
+      !enteredConfirmedPassword ||
+      !enteredMobilePhone ||
+      !enteredNationalId
     ) {
       alert('Preencha todos os campos')
       return
@@ -134,8 +136,8 @@ const SignUp = () => {
       name: enteredName,
       email: enteredEmail,
       password: enteredPassword,
-      // nationalId: enteredNationalId,
-      // mobilePhone: enteredMobilePhone,
+      nationalId: enteredNationalId,
+      mobilePhone: enteredMobilePhone,
       roles: [role],
     }
 
@@ -278,7 +280,7 @@ const SignUp = () => {
                 role === 'candidate' ? 'Digite seu CPF' : 'Digite seu CNPJ'
               }
               type="text"
-              inputRef={nationalIdInputRef}
+              onChange={(e) => nationalIdInput[1](e.target.value)}
             />
           </div>
           <div className={styles.field}>
@@ -287,8 +289,8 @@ const SignUp = () => {
               id="mobilePhone"
               mask="(99) 99999-9999"
               type="text"
-              inputRef={mobilePhoneInputRef}
               placeholder="Digite um telefone de contato"
+              onChange={(e) => mobilePhoneInput[1](e.target.value)}
             />
           </div>
         </div>

@@ -2,6 +2,7 @@
 
 import { FC, FormEvent, useRef, useState } from 'react'
 import { useLottie } from 'lottie-react'
+import { useRouter } from 'next/navigation'
 
 import { FcGoogle } from 'react-icons/fc'
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
@@ -9,7 +10,6 @@ import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
 import workingMan from '../../public/working-tech.json'
 
 import styles from './styles.module.scss'
-import { useRouter } from 'next/navigation'
 import userService from '@/services/userService'
 import { ThreeDots } from 'react-loader-spinner'
 

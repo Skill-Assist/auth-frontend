@@ -13,7 +13,7 @@ const userService = {
       })
 
       cookie.save('token', response.data.access_token, {
-        domain: '.skillassist.com.br',
+        domain: `${process.env.NEXT_PUBLIC_COOKIE_DOMAIN_URL}`,
       })
       return response
     } catch (error: any) {
@@ -35,7 +35,7 @@ const userService = {
       })
 
       cookie.save('token', response.data.access_token, {
-        domain: '.skillassist.com.br',
+        domain: `${process.env.NEXT_PUBLIC_COOKIE_DOMAIN_URL}`,
       })
       return response.data
     } catch (error: any) {
