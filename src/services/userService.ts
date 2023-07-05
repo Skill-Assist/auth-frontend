@@ -2,7 +2,7 @@ import { User } from '@/types/user'
 import axios from 'axios'
 import cookie from 'react-cookies'
 
-const API_URL = process.env.NEXT_PUBLIC_BASE_URL
+const API_URL = process.env.NEXT_PUBLIC_API_URL
 
 const userService = {
   signIn: async (email: string, password: string) => {
