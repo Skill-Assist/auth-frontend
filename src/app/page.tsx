@@ -36,7 +36,7 @@ const Login: FC = () => {
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault()
-    setLoading(true)
+    // setLoading(true)
 
     const enteredEmail = emailInputRef.current?.value
     const enteredPassword = passwordInputRef.current?.value
@@ -55,9 +55,15 @@ const Login: FC = () => {
       return
     }
 
-    router.push(`${process.env.NEXT_PUBLIC_USER_APP_URL}`)
+    const role = response.userRole[0]
 
-    setLoading(false)
+    if (role === 'candidate') {
+      router.push(`${process.env.NEXT_PUBLIC_USER_APP_URL}`)
+    } else if (role === 'recruiter') {
+      router.push(`${process.env.NEXT_PUBLIC_COMPANY_APP_URL}`)
+    } else {
+      alert('Role diferente de "company" ou "candidate"')
+    }
   }
 
   const handleSignUp = async (e: FormEvent) => {

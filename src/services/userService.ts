@@ -15,7 +15,8 @@ const userService = {
       cookie.save('token', response.data.access_token, {
         domain: `${process.env.NEXT_PUBLIC_COOKIE_DOMAIN_URL}`,
       })
-      return response
+
+      return response.data
     } catch (error: any) {
       return error.response.data
     }
@@ -43,19 +44,6 @@ const userService = {
     }
   },
 
-  updateProfile: async (body: any) => {
-    try {
-      const response = await axios.post(`${API_URL}/auth/signup`, {
-        body,
-      })
-
-      cookie.save('token', response.data.access_token, {})
-      return response
-    } catch (error: any) {
-      return error.response.data
-    }
-  },
-
   getProfile: async () => {
     const config = {
       headers: {
@@ -64,7 +52,7 @@ const userService = {
     }
     try {
       const profile = await axios.get(`${API_URL}/user/profile`, config)
-      return profile
+      return profile.data
     } catch (error: any) {
       return error.response
     }

@@ -141,9 +141,22 @@ const SignUp = () => {
       roles: [role],
     }
 
-    await userService.signUp(newUser)
+    console.log(newUser)
 
-    router.push(`${process.env.NEXT_PUBLIC_USER_APP_URL}`)
+    const response = await userService.signUp(newUser)
+
+    if (response.error) {
+      console.log(response)
+      return
+    }
+
+    if (role === 'candidate') {
+      router.push(`${process.env.NEXT_PUBLIC_USER_APP_URL}`)
+    } else if (role === 'recruiter') {
+      router.push(`${process.env.NEXT_PUBLIC_COMPANY_APP_URL}`)
+    } else {
+      alert('Papel não reconhecido')
+    }
   }
 
   return (
