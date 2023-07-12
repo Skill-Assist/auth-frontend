@@ -36,7 +36,7 @@ const Login: FC = () => {
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault()
-    // setLoading(true)
+    setLoading(true)
 
     const enteredEmail = emailInputRef.current?.value
     const enteredPassword = passwordInputRef.current?.value

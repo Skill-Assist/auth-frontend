@@ -3,7 +3,7 @@
 import { FormEvent, useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import InputMask from 'react-input-mask'
-import { TailSpin } from 'react-loader-spinner'
+import { TailSpin, ThreeDots } from 'react-loader-spinner'
 
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
 
@@ -53,10 +53,12 @@ const SignUp = () => {
   const [showPass, setShowPass] = useState(false)
   const [showConfirmedPass, setConfirmedShowPass] = useState(false)
   const [differentPasswords, setDifferentPasswords] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [noRole, setNoRole] = useState(false)
 
   const router = useRouter()
 
+  const nicknameInputRef = useRef<HTMLInputElement>(null)
   const nameInputRef = useRef<HTMLInputElement>(null)
   const emailInputRef = useRef<HTMLInputElement>(null)
   const passwordInputRef = useRef<HTMLInputElement>(null)
@@ -100,7 +102,9 @@ const SignUp = () => {
 
   const handleSignUp = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    setLoading(true)
 
+    const enteredNickname = nicknameInputRef.current?.value
     const enteredName = nameInputRef.current?.value
     const enteredEmail = emailInputRef.current?.value
     const enteredPassword = passwordInputRef.current?.value
@@ -109,6 +113,7 @@ const SignUp = () => {
     const enteredNationalId = nationalIdInput[0]
 
     if (
+      !enteredNickname ||
       !enteredName ||
       !enteredEmail ||
       !enteredPassword ||
@@ -117,22 +122,26 @@ const SignUp = () => {
       !enteredNationalId
     ) {
       alert('Preencha todos os campos')
+      setLoading(false)
       return
     }
 
     if (enteredPassword !== enteredConfirmedPassword) {
       setDifferentPasswords(true)
+      setLoading(false)
       return
     }
     setDifferentPasswords(false)
 
     if (role === '') {
       setNoRole(true)
+      setLoading(false)
       return
     }
     setNoRole(false)
 
     const newUser = {
+      nickname: enteredNickname,
       name: enteredName,
       email: enteredEmail,
       password: enteredPassword,
@@ -141,12 +150,11 @@ const SignUp = () => {
       roles: [role],
     }
 
-    console.log(newUser)
-
     const response = await userService.signUp(newUser)
 
     if (response.error) {
       console.log(response)
+      setLoading(false)
       return
     }
 
@@ -198,6 +206,20 @@ const SignUp = () => {
             </button>
           </div>
         </div>
+        <div className={styles.firstLine}>
+          <div className={`${styles.field} ${styles.nickNameField}`}>
+            <label htmlFor="nickname">Como gostaria de ser chamado?</label>
+            <input
+              id="nickname"
+              type="text"
+              ref={nicknameInputRef}
+              placeholder=""
+              maxLength={20}
+              minLength={3}
+              required
+            />
+          </div>
+        </div>
         <div className={styles.line}>
           <div className={styles.field}>
             <label htmlFor="name">
@@ -205,7 +227,7 @@ const SignUp = () => {
             </label>
             <input
               id="name"
-              type="name"
+              type="text"
               ref={nameInputRef}
               defaultValue={userData.name}
               placeholder="Digite seu nome"
@@ -256,7 +278,7 @@ const SignUp = () => {
           <div className={styles.field}>
             <label htmlFor="password">Confirme sua senha</label>
             <input
-              id="password"
+              id="confirmedPassword"
               type={showConfirmedPass ? 'text' : 'password'}
               ref={confirmedPasswordInputRef}
               placeholder="Confirme sua senha"
@@ -318,7 +340,23 @@ const SignUp = () => {
           )}
         </p>
         <div className={styles.actions}>
-          <button type="submit">Continuar</button>
+          <button type="submit">
+            {loading ? (
+              <div>
+                <ThreeDots
+                  height="15"
+                  width="15"
+                  radius="9"
+                  color="#ffffff"
+                  ariaLabel="three-dots-loading"
+                  wrapperStyle={{}}
+                  visible={true}
+                />
+              </div>
+            ) : (
+              <span>Continuar</span>
+            )}
+          </button>
         </div>
       </motion.form>
     </div>
