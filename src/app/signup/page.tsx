@@ -12,6 +12,7 @@ import { User } from '@/types/user'
 import styles from './styles.module.scss'
 import userService from '@/services/userService'
 import { useRouter } from 'next/navigation'
+import passwordValidator from '@/utils/passwordValidator'
 
 const titleDropIn = {
   hidden: {
@@ -52,6 +53,7 @@ const SignUp = () => {
   const [role, setRole] = useState('')
   const [showPass, setShowPass] = useState(false)
   const [showConfirmedPass, setConfirmedShowPass] = useState(false)
+  const [passwordError, setPasswordError] = useState('')
   const [differentPasswords, setDifferentPasswords] = useState(false)
   const [loading, setLoading] = useState(false)
   const [noRole, setNoRole] = useState(false)
@@ -126,19 +128,28 @@ const SignUp = () => {
       return
     }
 
-    if (enteredPassword !== enteredConfirmedPassword) {
-      setDifferentPasswords(true)
-      setLoading(false)
-      return
-    }
-    setDifferentPasswords(false)
-
     if (role === '') {
       setNoRole(true)
       setLoading(false)
       return
     }
     setNoRole(false)
+
+    const passwordValidity = passwordValidator(enteredPassword)
+
+    if (passwordValidity !== '') {
+      setPasswordError(passwordValidity)
+      setLoading(false)
+      return
+    }
+    setPasswordError('')
+
+    if (enteredPassword !== enteredConfirmedPassword) {
+      setDifferentPasswords(true)
+      setLoading(false)
+      return
+    }
+    setDifferentPasswords(false)
 
     const newUser = {
       nickname: enteredNickname,
@@ -333,10 +344,11 @@ const SignUp = () => {
           {noRole === true && <span>Selecione um papel</span>}
         </p>
         <p className={styles.error}>
-          {differentPasswords === true ? (
+          {passwordError !== '' && <span>{passwordError}</span>}
+        </p>
+        <p className={styles.error}>
+          {differentPasswords === true && (
             <span>As senhas precisasm ser iguais</span>
-          ) : (
-            <span>&nbsp;</span>
           )}
         </p>
         <div className={styles.actions}>
