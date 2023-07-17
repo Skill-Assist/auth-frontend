@@ -22,18 +22,9 @@ const userService = {
     }
   },
 
-  signUp: async (body: User) => {
-    const { name, email, password, roles, nationalId, mobilePhone } = body
-
+  signUp: async (newUser: User) => {
     try {
-      const response = await axios.post(`${API_URL}/auth/signup`, {
-        name,
-        email,
-        password,
-        roles,
-        nationalId,
-        mobilePhone,
-      })
+      const response = await axios.post(`${API_URL}/auth/signup`, newUser)
 
       cookie.save('token', response.data.access_token, {
         domain: `${process.env.NEXT_PUBLIC_COOKIE_DOMAIN_URL}`,

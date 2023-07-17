@@ -152,13 +152,14 @@ const SignUp = () => {
     setDifferentPasswords(false)
 
     const newUser = {
-      nickname: enteredNickname,
+      // nickname: enteredNickname,
       name: enteredName,
       email: enteredEmail,
       password: enteredPassword,
-      nationalId: enteredNationalId,
-      mobilePhone: enteredMobilePhone,
+      passwordConfirm: enteredConfirmedPassword,
       roles: [role],
+      mobilePhone: enteredMobilePhone,
+      nationalId: enteredNationalId,
     }
 
     const response = await userService.signUp(newUser)
@@ -269,6 +270,7 @@ const SignUp = () => {
               defaultValue={userData.password}
               placeholder="Digite sua senha"
               minLength={8}
+              maxLength={20}
               required
             />
             {showPass && (
@@ -294,6 +296,7 @@ const SignUp = () => {
               ref={confirmedPasswordInputRef}
               placeholder="Confirme sua senha"
               minLength={8}
+              maxLength={20}
               required
             />
             {showConfirmedPass && (
