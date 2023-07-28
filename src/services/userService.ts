@@ -12,6 +12,10 @@ const userService = {
         password,
       })
 
+      cookie.save('show_skill_assist_announcement', 'true', {
+        domain: `${process.env.NEXT_PUBLIC_COOKIE_DOMAIN_URL}`,
+      })
+
       cookie.save('token', response.data.access_token, {
         domain: `${process.env.NEXT_PUBLIC_COOKIE_DOMAIN_URL}`,
       })
@@ -25,6 +29,10 @@ const userService = {
   signUp: async (newUser: User) => {
     try {
       const response = await axios.post(`${API_URL}/auth/signup`, newUser)
+
+      cookie.save('show_skill_assist_announcement', 'true', {
+        domain: `${process.env.NEXT_PUBLIC_COOKIE_DOMAIN_URL}`,
+      })
 
       cookie.save('token', response.data.access_token, {
         domain: `${process.env.NEXT_PUBLIC_COOKIE_DOMAIN_URL}`,

@@ -152,7 +152,7 @@ const SignUp = () => {
     setDifferentPasswords(false)
 
     const newUser = {
-      // nickname: enteredNickname,
+      nickname: enteredNickname,
       name: enteredName,
       email: enteredEmail,
       password: enteredPassword,
