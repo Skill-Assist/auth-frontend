@@ -1,0 +1,14 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/v1/:path*",
+      "destination": "http://a3d7011a8f46f4fa79d4efc24659eeaf-1756230555.sa-east-1.elb.amazonaws.com/api/v1/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.skillassist.com.br"
+        }
+      ]
+    }
+  ]
+}
