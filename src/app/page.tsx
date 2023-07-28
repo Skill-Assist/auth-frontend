@@ -103,15 +103,6 @@ const Login: FC = () => {
     router.push('/signup')
   }
 
-  const apiTest = async () => {
-    console.log('loading')
-    const response = await axios.get(
-      'http://a3d7011a8f46f4fa79d4efc24659eeaf-1756230555.sa-east-1.elb.amazonaws.com/api/v1/health',
-    )
-
-    console.log(response)
-  }
-
   return (
     <>
       <div className={styles.container}>
@@ -233,12 +224,6 @@ const Login: FC = () => {
         </div>
         <div className={styles.animation}>{View}</div>
       </div>
-      <button
-        style={{ position: 'absolute', left: '50%', top: '0' }}
-        onClick={apiTest}
-      >
-        Teste de API
-      </button>
     </>
   )
 }
