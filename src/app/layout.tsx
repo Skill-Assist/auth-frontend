@@ -5,7 +5,7 @@ import Head from './head'
 import Image from 'next/image'
 
 import '@/styles/globals.scss'
-
+// layout
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
