@@ -12,7 +12,6 @@ import workingMan from '../../public/working-tech.json'
 import styles from './styles.module.scss'
 import userService from '@/services/userService'
 import { ThreeDots } from 'react-loader-spinner'
-import axios from 'axios'
 
 const Login: FC = () => {
   const router = useRouter()
