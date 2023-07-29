@@ -5,7 +5,8 @@ import Head from './head'
 import Image from 'next/image'
 
 import '@/styles/globals.scss'
-// layout
+import { Toaster } from 'react-hot-toast'
+
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
@@ -18,7 +19,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           width={50}
           height={50}
         />
-        {children}
+        <>
+          {children}
+          <Toaster />
+        </>
       </body>
     </html>
   )

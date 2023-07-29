@@ -1,11 +1,12 @@
 'use client'
 
 import { FormEvent, useEffect, useRef, useState } from 'react'
+import Link from 'next/link'
 import { motion } from 'framer-motion'
 import InputMask from 'react-input-mask'
 import { TailSpin, ThreeDots } from 'react-loader-spinner'
-
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
+import { toast } from 'react-hot-toast'
 
 import { User } from '@/types/user'
 
@@ -89,7 +90,7 @@ const SignUp = () => {
         <TailSpin
           height="80"
           width="80"
-          color="var(--highlight-1)"
+          color="var(--primary)"
           ariaLabel="tail-spin-loading"
           radius="1"
           wrapperStyle={{}}
@@ -123,7 +124,10 @@ const SignUp = () => {
       !enteredMobilePhone ||
       !enteredNationalId
     ) {
-      alert('Preencha todos os campos')
+      toast.error('Preencha todos os campos', {
+        duration: 3000,
+        position: 'top-right',
+      })
       setLoading(false)
       return
     }
@@ -164,6 +168,15 @@ const SignUp = () => {
 
     const response = await userService.signUp(newUser)
 
+    if (response.error && response.message === 'Email already exists') {
+      toast.error('E-mail já cadastrado', {
+        duration: 3000,
+        position: 'top-right',
+      })
+      setLoading(false)
+      return
+    }
+
     if (response.error) {
       console.log(response)
       setLoading(false)
@@ -175,7 +188,10 @@ const SignUp = () => {
     } else if (role === 'recruiter') {
       router.push(`${process.env.NEXT_PUBLIC_COMPANY_APP_URL}`)
     } else {
-      alert('Papel não reconhecido')
+      toast.error('Papel não reconhecido', {
+        duration: 3000,
+        position: 'top-right',
+      })
     }
   }
 
@@ -225,6 +241,7 @@ const SignUp = () => {
               id="nickname"
               type="text"
               ref={nicknameInputRef}
+              defaultValue={userData.nickname}
               placeholder=""
               maxLength={20}
               minLength={3}
@@ -275,14 +292,14 @@ const SignUp = () => {
             />
             {showPass && (
               <AiFillEyeInvisible
-                fill="var(--highlight-1)"
+                fill="var(--primary)"
                 size={18}
                 onClick={togglePassword}
               />
             )}
             {!showPass && (
               <AiFillEye
-                fill="var(--highlight-1)"
+                fill="var(--primary)"
                 size={18}
                 onClick={togglePassword}
               />
@@ -301,14 +318,14 @@ const SignUp = () => {
             />
             {showConfirmedPass && (
               <AiFillEyeInvisible
-                fill="var(--highlight-1)"
+                fill="var(--primary)"
                 size={18}
                 onClick={toggleConfirmedPassword}
               />
             )}
             {!showConfirmedPass && (
               <AiFillEye
-                fill="var(--highlight-1)"
+                fill="var(--primary)"
                 size={18}
                 onClick={toggleConfirmedPassword}
               />
@@ -355,6 +372,7 @@ const SignUp = () => {
           )}
         </p>
         <div className={styles.actions}>
+          <Link href={'/'}>Voltar</Link>
           <button type="submit">
             {loading ? (
               <div>

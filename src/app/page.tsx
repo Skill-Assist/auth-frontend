@@ -3,15 +3,16 @@
 import { FC, FormEvent, useRef, useState } from 'react'
 import { useLottie } from 'lottie-react'
 import { useRouter } from 'next/navigation'
-
 import { FcGoogle } from 'react-icons/fc'
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
+import { toast } from 'react-hot-toast'
+import { ThreeDots } from 'react-loader-spinner'
 
 import workingMan from '../../public/working-tech.json'
 
-import styles from './styles.module.scss'
 import userService from '@/services/userService'
-import { ThreeDots } from 'react-loader-spinner'
+
+import styles from './styles.module.scss'
 
 const Login: FC = () => {
   const router = useRouter()
@@ -42,7 +43,7 @@ const Login: FC = () => {
     const enteredPassword = passwordInputRef.current?.value
 
     if (!enteredEmail || !enteredPassword) {
-      alert('Preencha todos os campos')
+      toast.error('Preencha todos os campos')
       setLoading(false)
       return
     }
@@ -62,7 +63,10 @@ const Login: FC = () => {
     } else if (role === 'recruiter') {
       router.push(`${process.env.NEXT_PUBLIC_COMPANY_APP_URL}`)
     } else {
-      alert('Role diferente de "company" ou "candidate"')
+      toast.error('Role diferente de "company" ou "candidate"', {
+        duration: 3000,
+        position: 'top-right',
+      })
     }
   }
 
@@ -76,23 +80,19 @@ const Login: FC = () => {
     const enteredPassword = passwordInputRef.current?.value
 
     if (!enteredName || !enteredEmail || !enteredPassword) {
-      alert('Preencha todos os campos')
+      toast.error('Preencha todos os campos', {
+        duration: 3000,
+        position: 'top-right',
+      })
       setLoading(false)
       return
     }
 
     // VERIFICAR SE O EMAIL JÁ ESTÁ EM USO
 
-    // const response = await userService.signUp(enteredEmail, enteredPassword)
-
-    // if (response.error) {
-    //   setError('Esse email já está em uso')
-    //   setLoading(false)
-    //   return
-    // }
-
     const userData = {
       name: enteredName,
+      nickname: enteredName.split(' ')[0],
       email: enteredEmail,
       password: enteredPassword,
     }
@@ -171,14 +171,14 @@ const Login: FC = () => {
               />
               {show && (
                 <AiFillEyeInvisible
-                  fill="var(--highlight-1)"
+                  fill="var(--primary)"
                   size={18}
                   onClick={togglePassword}
                 />
               )}
               {!show && (
                 <AiFillEye
-                  fill="var(--highlight-1)"
+                  fill="var(--primary)"
                   size={18}
                   onClick={togglePassword}
                 />
@@ -211,12 +211,26 @@ const Login: FC = () => {
             {signIn ? (
               <p>
                 Não possui uma conta?{' '}
-                <a onClick={() => setSignIn(false)}>Sign Up</a>
+                <a
+                  onClick={() => {
+                    setSignIn(false)
+                    setError('')
+                  }}
+                >
+                  Sign Up
+                </a>
               </p>
             ) : (
               <p>
                 Já possui uma conta?{' '}
-                <a onClick={() => setSignIn(true)}>Sign In</a>
+                <a
+                  onClick={() => {
+                    setSignIn(true)
+                    setError('')
+                  }}
+                >
+                  Sign In
+                </a>
               </p>
             )}
           </div>
