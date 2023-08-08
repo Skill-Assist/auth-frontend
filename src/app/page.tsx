@@ -3,7 +3,7 @@
 import { FC, FormEvent, useRef, useState } from 'react'
 import { useLottie } from 'lottie-react'
 import { useRouter } from 'next/navigation'
-import { FcGoogle } from 'react-icons/fc'
+// import { FcGoogle } from 'react-icons/fc'
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
 import { toast } from 'react-hot-toast'
 import { ThreeDots } from 'react-loader-spinner'
@@ -19,7 +19,8 @@ const Login: FC = () => {
   const nameInputRef = useRef<HTMLInputElement>(null)
   const emailInputRef = useRef<HTMLInputElement>(null)
   const passwordInputRef = useRef<HTMLInputElement>(null)
-  const [signIn, setSignIn] = useState(false)
+  // const [signIn, setSignIn] = useState(true)
+  const signIn = true
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const [show, setShow] = useState(false)
@@ -70,37 +71,37 @@ const Login: FC = () => {
     }
   }
 
-  const handleSignUp = async (e: FormEvent) => {
-    e.preventDefault()
+  // const handleSignUp = async (e: FormEvent) => {
+  //   e.preventDefault()
 
-    setLoading(true)
+  //   setLoading(true)
 
-    const enteredName = nameInputRef.current?.value
-    const enteredEmail = emailInputRef.current?.value
-    const enteredPassword = passwordInputRef.current?.value
+  //   const enteredName = nameInputRef.current?.value
+  //   const enteredEmail = emailInputRef.current?.value
+  //   const enteredPassword = passwordInputRef.current?.value
 
-    if (!enteredName || !enteredEmail || !enteredPassword) {
-      toast.error('Preencha todos os campos', {
-        duration: 3000,
-        position: 'top-right',
-      })
-      setLoading(false)
-      return
-    }
+  //   if (!enteredName || !enteredEmail || !enteredPassword) {
+  //     toast.error('Preencha todos os campos', {
+  //       duration: 3000,
+  //       position: 'top-right',
+  //     })
+  //     setLoading(false)
+  //     return
+  //   }
 
-    // VERIFICAR SE O EMAIL JÁ ESTÁ EM USO
+  //   // VERIFICAR SE O EMAIL JÁ ESTÁ EM USO
 
-    const userData = {
-      name: enteredName,
-      nickname: enteredName.split(' ')[0],
-      email: enteredEmail,
-      password: enteredPassword,
-    }
+  //   const userData = {
+  //     name: enteredName,
+  //     nickname: enteredName.split(' ')[0],
+  //     email: enteredEmail,
+  //     password: enteredPassword,
+  //   }
 
-    localStorage.setItem('userData', JSON.stringify(userData))
+  //   localStorage.setItem('userData', JSON.stringify(userData))
 
-    router.push('/signup')
-  }
+  //   router.push('/signup')
+  // }
 
   return (
     <>
@@ -108,15 +109,13 @@ const Login: FC = () => {
         <div className={styles.login}>
           <div className={styles.text}>
             <h1>{signIn ? 'Entre em ' : 'Crie'} sua conta</h1>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. (slogan)
-            </p>
+            <p>Simplificamos a aplicação de provas com IA</p>
           </div>
-          <button className={styles.googleBtn}>
+          {/* <button className={styles.googleBtn}>
             <FcGoogle />
             {signIn ? 'Login ' : 'Cadastre-se '}
             com Google
-          </button>
+          </button> */}
           <div className={styles.or}>
             <hr />
             <p>or</p>
@@ -124,7 +123,8 @@ const Login: FC = () => {
           </div>
           <form
             className={styles.form}
-            onSubmit={signIn ? handleLogin : handleSignUp}
+            // onSubmit={signIn ? handleLogin : handleSignUp}
+            onSubmit={handleLogin}
           >
             {!signIn && (
               <div
@@ -207,7 +207,7 @@ const Login: FC = () => {
               )}
             </button>
           </form>
-          <div className={styles.footer}>
+          {/* <div className={styles.footer}>
             {signIn ? (
               <p>
                 Não possui uma conta?{' '}
@@ -233,7 +233,7 @@ const Login: FC = () => {
                 </a>
               </p>
             )}
-          </div>
+          </div> */}
         </div>
         <div className={styles.animation}>{View}</div>
       </div>

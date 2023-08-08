@@ -78,6 +78,8 @@ const SignUp = () => {
   }
 
   useEffect(() => {
+    router.push(`/`)
+
     const data = localStorage.getItem('userData')
     if (data) {
       setUserData(JSON.parse(data))

@@ -7,7 +7,7 @@ export default function Head() {
         httpEquiv="Content-Security-Policy"
         content="upgrade-insecure-requests"
       />
-      <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+      <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     </>
   )
 }
