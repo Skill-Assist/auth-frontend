@@ -109,18 +109,18 @@ const Login: FC = () => {
         <div className={styles.login}>
           <div className={styles.text}>
             <h1>{signIn ? 'Entre em ' : 'Crie'} sua conta</h1>
-            <p>Simplificamos a aplicação de provas com IA</p>
+            <p>Simplificamos o processo de recrutamento com IA</p>
           </div>
           {/* <button className={styles.googleBtn}>
             <FcGoogle />
             {signIn ? 'Login ' : 'Cadastre-se '}
             com Google
           </button> */}
-          <div className={styles.or}>
+          {/* <div className={styles.or}>
             <hr />
             <p>or</p>
             <hr />
-          </div>
+          </div> */}
           <form
             className={styles.form}
             // onSubmit={signIn ? handleLogin : handleSignUp}
@@ -159,7 +159,7 @@ const Login: FC = () => {
             </div>
             <div className={`${styles.field} ${error !== '' && styles.error}`}>
               <label htmlFor="password">
-                Password <span>*</span>
+                Senha <span>*</span>
               </label>
               <input
                 id="password"
